@@ -37,8 +37,6 @@ func Main(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNoContent)
 		return
 	}
-	// Set CORS headers for the main request.
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	location, ok := r.URL.Query()["location"]
 
@@ -55,9 +53,8 @@ func Main(w http.ResponseWriter, r *http.Request) {
 	// Put together end point based on user input field
 	googleBaseURL := "https://maps.googleapis.com/maps/api/geocode/json?address="
 
-	// Need to figure how to secure API key
-	// Possibly use Google Secret Manager that stores API Key
-	googleEncodingKey := "&key=AIzaSyC6o2rBdyg0AB7CSzn1VbR9h9nFxxk85MA"
+	// Removed API Key for now.
+	googleEncodingKey := "&key=*****************************"
 	googleEncodingEndPoint := googleBaseURL + convertEncodedLocation + googleEncodingKey
 
 	// GET Request to Google Encoding API to retrieve latitude and longitude based on user input
@@ -102,7 +99,8 @@ func getWeatherInfo(lat float64, long float64) interface{} {
 	log.Println("Called function to get weather information.")
 
 	// Need to figure out where to secure this API key, should not be hard coded
-	darkSkyKey := "e0b3d4b4a90801965ffcc68ee08781e2"
+	// Removed API Key for now
+	darkSkyKey := "***************************"
 	darkSkyKey = strings.TrimSpace(darkSkyKey)
 
 	convertLatitude := fmt.Sprintf("%f", lat)
